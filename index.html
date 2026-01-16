@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
   text-align: center;
   background: #fff0f5;
   overflow: hidden;
@@ -36,6 +36,7 @@ button {
   cursor: pointer;
   background: #ff85a2;
   color: white;
+  transition: all 0.3s ease;
 }
 
 button:hover {
@@ -48,8 +49,11 @@ button:hover {
   color: #444;
 }
 
+/* 🔽 ลดขนาดรูป */
 img {
-  width: 120px;
+  width: 180px;
+  max-width: 85%;
+  height: auto;
   border-radius: 20px;
   margin-top: 20px;
 }
@@ -63,21 +67,15 @@ img {
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh);
-    opacity: 0;
-  }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- หน้าแรก -->
+<!-- หน้า 1 -->
 <div class="page active" id="page1">
   <h1>วันนี้เหนื่อยไหม 💭</h1>
 
@@ -86,17 +84,13 @@ img {
 
   <div class="message" id="msg"></div>
 
-  <img id="photo" src="FB_IMG_1768045876236.jpg" style="{
-  width: 250px;
-  max-width: 90%;
-  height: auto;
-  }">
+  <img id="photo" src="FB_IMG_1768045876236.jpg" style="display:none">
 
   <br>
   <button id="nextBtn" style="display:none" onclick="nextPage()">Next ➜</button>
 </div>
 
-<!-- หน้าถัดไป -->
+<!-- หน้า 2 -->
 <div class="page" id="page2" style="background:#ffd6e8; height:100vh;">
   <h1>💖</h1>
   <p style="font-size:20px; color:#ff3f7f;">
@@ -108,22 +102,50 @@ img {
     <br><br>
     ขออธิษฐานให้เราได้เติมโตไปพร้อมกันน่ะ
   </p>
+
+  <button onclick="goPage3()">Next ➜</button>
+</div>
+
+<!-- หน้า 3 -->
+<div class="page" id="page3">
+  <h1>รักคนทำเว็ปนี้ไหม 💕</h1>
+
+  <button onclick="notLove()">ไม่</button>
+  <button id="loveBtn" onclick="love()">รัก</button>
+
+  <div class="message" id="loveMsg"></div>
 </div>
 
 <script>
+let loveSize = 16;
+
 function answer() {
   document.getElementById("msg").innerText =
   "วันนี้เหนื่อยใช่มั่ย แต่รู้ไหมเธอยังมีฉันคนนี้อยู่ข้างๆ ถึงจะไม่ได้มีโอกาสทำอะไรมากมาย แต่ก็ยินดีที่ได้อยู่ด้วยน่ะ ฉันรักน่ะ ถึงจะยังไม่ได้เป็นแฟนกันก็ตาม แต่ก็พร้อมซับพอร์ตเสมอน่ะ รักกกกที่สุด🫠🫠";
 
   document.getElementById("photo").style.display = "block";
   document.getElementById("nextBtn").style.display = "inline-block";
-
   createHearts();
 }
 
 function nextPage() {
-  document.getElementById("page1").classList.remove("active");
-  document.getElementById("page2").classList.add("active");
+  page1.classList.remove("active");
+  page2.classList.add("active");
+}
+
+function goPage3() {
+  page2.classList.remove("active");
+  page3.classList.add("active");
+}
+
+function notLove() {
+  loveSize += 6;
+  document.getElementById("loveBtn").style.fontSize = loveSize + "px";
+}
+
+function love() {
+  document.getElementById("loveMsg").innerText =
+  "รักเหมือนกันน่ะ💝💝 อิอิ 🌹🌷🪻";
 }
 
 function createHearts() {
@@ -135,9 +157,7 @@ function createHearts() {
     heart.style.fontSize = Math.random() * 20 + 20 + "px";
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 4000);
+    setTimeout(() => heart.remove(), 4000);
   }, 300);
 }
 </script>

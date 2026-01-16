@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ถึงคนเก่งของฉัน 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  background: #fff0f5;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  padding: 40px 20px;
+}
+
+.page.active {
+  display: block;
+}
+
+h1 {
+  color: #ff5c8a;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #ff85a2;
+  color: white;
+}
+
+button:hover {
+  background: #ff5c8a;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #444;
+}
+
+img {
+  width: 220px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* หัวใจลอย */
+.heart {
+  position: absolute;
+  bottom: 0;
+  font-size: 24px;
+  animation: floatUp 4s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- หน้าแรก -->
+<div class="page active" id="page1">
+  <h1>วันนี้เหนื่อยไหม 💭</h1>
+
+  <button onclick="answer()">เหนื่อย</button>
+  <button onclick="answer()">เหนื่อยมากๆ</button>
+
+  <div class="message" id="msg"></div>
+
+  <img id="photo" src="love.jpg" style="display:none">
+
+  <br>
+  <button id="nextBtn" style="display:none" onclick="nextPage()">Next ➜</button>
+</div>
+
+<!-- หน้าถัดไป -->
+<div class="page" id="page2" style="background:#ffd6e8; height:100vh;">
+  <h1>💖</h1>
+  <p style="font-size:20px; color:#ff3f7f;">
+    วันนี้เธอเก่งมากก💝รู้มั้ยย  
+    <br><br>
+    คนดีผ่านวันนี้มาได้ถึงแม้จะเหนื่อย  
+    <br>
+    ฉันจะคอยเป็นกำลังใจให้เธอเสมอน่ะ  
+    <br><br>
+    ขออธิษฐานให้เราได้เติมโตไปพร้อมกันน่ะ
+  </p>
+</div>
+
+<script>
+function answer() {
+  document.getElementById("msg").innerText =
+  "วันนี้เหนื่อยใช่มั่ย แต่รู้ไหมเธอยังมีฉันคนนี้อยู่ข้างๆ ถึงจะไม่ได้มีโอกาสทำอะไรมากมาย แต่ก็ยินดีที่ได้อยู่ด้วยน่ะ ฉันรักน่ะ ถึงจะยังไม่ได้เป็นแฟนกันก็ตาม แต่ก็พร้อมซับพอร์ตเสมอน่ะ รักกกกที่สุด🫠🫠";
+
+  document.getElementById("photo").style.display = "block";
+  document.getElementById("nextBtn").style.display = "inline-block";
+
+  createHearts();
+}
+
+function nextPage() {
+  document.getElementById("page1").classList.remove("active");
+  document.getElementById("page2").classList.add("active");
+}
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>

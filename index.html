@@ -49,7 +49,6 @@ button:hover {
   color: #444;
 }
 
-/* 🔽 ลดขนาดรูป */
 img {
   width: 180px;
   max-width: 85%;
@@ -58,7 +57,6 @@ img {
   margin-top: 20px;
 }
 
-/* หัวใจลอย */
 .heart {
   position: absolute;
   bottom: 0;
@@ -75,7 +73,10 @@ img {
 
 <body>
 
-<!-- หน้า 1 -->
+<audio id="bgMusic" loop>
+  <source src="Kiss For luv.mp3" type="audio/mpeg">
+</audio>
+
 <div class="page active" id="page1">
   <h1>วันนี้เหนื่อยไหม 💭</h1>
 
@@ -90,7 +91,6 @@ img {
   <button id="nextBtn" style="display:none" onclick="nextPage()">Next ➜</button>
 </div>
 
-<!-- หน้า 2 -->
 <div class="page" id="page2" style="background:#ffd6e8; height:100vh;">
   <h1>💖</h1>
   <p style="font-size:20px; color:#ff3f7f;">
@@ -106,7 +106,6 @@ img {
   <button onclick="goPage3()">Next ➜</button>
 </div>
 
-<!-- หน้า 3 -->
 <div class="page" id="page3">
   <h1>รักคนทำเว็ปนี้ไหม 💕</h1>
 
@@ -118,8 +117,12 @@ img {
 
 <script>
 let loveSize = 16;
+const music = document.getElementById("bgMusic");
 
 function answer() {
+  // สั่งให้เพลงเล่นเมื่อกดปุ่ม
+  music.play().catch(e => console.log("Music play blocked"));
+
   document.getElementById("msg").innerText =
   "วันนี้เหนื่อยใช่มั่ย แต่รู้ไหมเธอยังมีฉันคนนี้อยู่ข้างๆ ถึงจะไม่ได้มีโอกาสทำอะไรมากมาย แต่ก็ยินดีที่ได้อยู่ด้วยน่ะ ฉันรักน่ะ ถึงจะยังไม่ได้เป็นแฟนกันก็ตาม แต่ก็พร้อมซับพอร์ตเสมอน่ะ รักกกกที่สุด🫠🫠";
 
@@ -129,17 +132,17 @@ function answer() {
 }
 
 function nextPage() {
-  page1.classList.remove("active");
-  page2.classList.add("active");
+  document.getElementById("page1").classList.remove("active");
+  document.getElementById("page2").classList.add("active");
 }
 
 function goPage3() {
-  page2.classList.remove("active");
-  page3.classList.add("active");
+  document.getElementById("page2").classList.remove("active");
+  document.getElementById("page3").classList.add("active");
 }
 
 function notLove() {
-  loveSize += 6;
+  loveSize += 10; // เพิ่มขนาดให้กดง่ายขึ้นนิดนึงครับ
   document.getElementById("loveBtn").style.fontSize = loveSize + "px";
 }
 
